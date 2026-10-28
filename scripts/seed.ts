@@ -187,7 +187,8 @@ async function main() {
     const code = index % 3 === 0 ? partners : waitlist;
     const hasAccount = stage !== "invited";
     const userId = hasAccount ? await createUser(address, name) : null;
-    if (hasAccount) code === partners ? partnerUses++ : waitlistUses++;
+    if (hasAccount && code === partners) partnerUses++;
+    else if (hasAccount) waitlistUses++;
 
     const tester = await must(
       db

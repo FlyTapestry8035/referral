@@ -32,15 +32,15 @@ Status legend: `[x]` done and verified by running it, `[~]` built but only partl
 - [x] Lint, typecheck, tests green → commit
 
 ## Phase 3 – Feedback & email
-- [ ] Tester feedback form + floating Report widget (screenshot → Storage, URL, UA, viewport)
-- [ ] Embeddable `<script>` widget + public ingest endpoint
-- [ ] Feedback inbox: filter, search, severity, status, tags, duplicate merge
-- [ ] Signed tokens (HMAC, 7 days) → /f/TOKEN feedback without login; unsubscribe link
-- [ ] /api/cron/digest (CRON_SECRET, due logic, send hour when hourly, idempotent via email_log)
-- [ ] Digest email (react-email), settings page + test email
-- [ ] /api/cron/nudges (inactive N days / stuck 5 days, max 1 per week)
-- [ ] Close-the-loop email on status → fixed
-- [ ] Lint, typecheck, tests green → commit
+- [x] Tester feedback form + floating Report widget (screenshot → Storage, URL, UA, viewport)
+- [x] Embeddable `<script>` widget + public ingest endpoint
+- [x] Feedback inbox: filter, search, severity, status, tags, duplicate merge
+- [x] Signed tokens (HMAC, 7 days) → /f/TOKEN feedback without login; unsubscribe link
+- [x] /api/cron/digest (CRON_SECRET, due logic, send hour when hourly, idempotent via email_log)
+- [x] Digest email (react-email), settings page + test email
+- [x] /api/cron/nudges (inactive N days / stuck 5 days, max 1 per week)
+- [x] Close-the-loop email on status → fixed
+- [x] Lint, typecheck, tests green → commit
 
 ## Phase 4 – Features 7–10 & polish
 - [ ] Rewards rules + automatic awarding + badges

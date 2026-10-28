@@ -68,18 +68,17 @@ export function memberInviteEmail(to: string, companyName: string, role: string,
   };
 }
 
-export function digestEmail(to: string, subject: string, props: DigestEmailProps): EmailMessage {
-  return {
-    to,
-    subject,
-    react: <DigestEmail {...props} />,
-    headers: { "List-Unsubscribe": `<${props.unsubscribeUrl}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
-  };
+function unsubscribeHeaders(oneClickUrl?: string): Record<string, string> | undefined {
+  return oneClickUrl ? { "List-Unsubscribe": `<${oneClickUrl}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" } : undefined;
+}
+
+export function digestEmail(to: string, subject: string, props: DigestEmailProps, oneClickUrl?: string): EmailMessage {
+  return { to, subject, react: <DigestEmail {...props} />, headers: unsubscribeHeaders(oneClickUrl) };
 }
 
 export function nudgeEmail(
   to: string,
-  opts: { name: string; programName: string; reason: "inactive" | "stuck"; missionTitle?: string; appUrl: string; bugUrl: string; unsubscribeUrl: string },
+  opts: { name: string; programName: string; reason: "inactive" | "stuck"; missionTitle?: string; appUrl: string; bugUrl: string; unsubscribeUrl: string; oneClickUrl?: string },
 ): EmailMessage {
   const paragraphs =
     opts.reason === "stuck" && opts.missionTitle
@@ -98,7 +97,7 @@ export function nudgeEmail(
         unsubscribeUrl={opts.unsubscribeUrl}
       />
     ),
-    headers: { "List-Unsubscribe": `<${opts.unsubscribeUrl}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
+    headers: unsubscribeHeaders(opts.oneClickUrl),
   };
 }
 

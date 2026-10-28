@@ -44,7 +44,6 @@ export function EmailLayout({
                   <Link href={footer.unsubscribeUrl} style={{ color: colors.muted, textDecoration: "underline" }}>
                     Unsubscribe from these emails
                   </Link>
-                  .
                 </>
               ) : null}
             </Text>

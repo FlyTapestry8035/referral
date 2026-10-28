@@ -12,3 +12,9 @@ export function unsubscribeLink(testerId: string): string {
   const token = createSignedToken(env().TOKEN_SECRET, "unsubscribe", testerId, UNSUBSCRIBE_TOKEN_TTL_SECONDS);
   return appUrl(`/unsubscribe/${token}`);
 }
+
+/** RFC 8058 one-click endpoint for the List-Unsubscribe header. */
+export function oneClickUnsubscribeLink(testerId: string): string {
+  const token = createSignedToken(env().TOKEN_SECRET, "unsubscribe", testerId, UNSUBSCRIBE_TOKEN_TTL_SECONDS);
+  return appUrl(`/api/unsubscribe/${token}`);
+}

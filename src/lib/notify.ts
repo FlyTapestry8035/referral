@@ -21,7 +21,7 @@ export async function sendFixNotice(feedbackId: string) {
 
   const result = await sendEmail(
     fixNoticeEmail(tester.email, {
-      name: tester.name,
+      name: tester.name.split(" ")[0] || tester.name,
       programName: fb.programs?.name ?? "the beta",
       feedbackTitle: fb.title,
       unsubscribeUrl: unsubscribeLink(tester.id),
