@@ -18,18 +18,18 @@ Status legend: `[x]` done and verified by running it, `[~]` built but only partl
 - [x] Lint, typecheck, tests green → commit
 
 ## Phase 2 – Dashboard, codes, missions
-- [ ] /dashboard layout with tabs (Testers, Feedback, Codes, Missions, Settings, more), program switcher
-- [ ] Title + takeaway sentence, five KPI tiles, testing funnel (Recharts)
-- [ ] Tester sheet: row numbers, grid lines, sticky header, sort (aria-sort), search, stage filter, count
-- [ ] Range selection (drag, Shift+click, Escape) + status bar (count, sum, average)
-- [ ] In-cell bars, stage dots, column visibility, CSV export, inline edit name/notes (optimistic)
-- [ ] Row side panel: profile, feedback timeline, 0–5 rating, notes, resend invite, revoke access
-- [ ] Realtime updates
-- [ ] Codes tab: create, limits, expiry, revoke, usage count, invite by email
-- [ ] Missions tab: CRUD + ordering; tester /app checklist
-- [ ] Light/dark mode, phone width
-- [ ] `npm run seed`
-- [ ] Lint, typecheck, tests green → commit
+- [x] /dashboard layout with tabs (Testers, Feedback, Codes, Missions, Settings, more), program switcher
+- [x] Title + takeaway sentence, five KPI tiles, testing funnel (Recharts)
+- [x] Tester sheet: row numbers, grid lines, sticky header, sort (aria-sort), search, stage filter, count
+- [x] Range selection (drag, Shift+click, Escape) + status bar (count, sum, average)
+- [x] In-cell bars, stage dots, column visibility, CSV export, inline edit name/notes (optimistic)
+- [x] Row side panel: profile, feedback timeline, 0–5 rating, notes, resend invite, revoke access
+- [x] Realtime updates
+- [x] Codes tab: create, limits, expiry, revoke, usage count, invite by email
+- [x] Missions tab: CRUD + ordering; tester /app checklist
+- [x] Light/dark mode, phone width
+- [x] `npm run seed`
+- [x] Lint, typecheck, tests green → commit
 
 ## Phase 3 – Feedback & email
 - [ ] Tester feedback form + floating Report widget (screenshot → Storage, URL, UA, viewport)

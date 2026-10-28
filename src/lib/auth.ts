@@ -73,7 +73,7 @@ export const requireDashboard = cache(async (): Promise<DashboardContext> => {
   const supabase = await createClient();
   const { data: programs } = await supabase.from("programs").select("*").order("created_at");
   const memberPrograms = (programs ?? []).filter((p) => memberships.some((m) => m.companyId === p.company_id));
-  if (memberPrograms.length === 0) redirect("/dashboard/setup");
+  if (memberPrograms.length === 0) redirect("/setup");
 
   const wanted = (await cookies()).get(PROGRAM_COOKIE)?.value;
   const program = memberPrograms.find((p) => p.id === wanted) ?? memberPrograms[0];

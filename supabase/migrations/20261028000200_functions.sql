@@ -391,12 +391,18 @@ returns trigger
 language plpgsql set search_path = ''
 as $$
 begin
-  new.updated_at := now();
+  -- Clients can only write `status` (column grants), so their timestamps are always "now".
+  -- Server code (service role) may backdate, which the demo seed uses.
+  if tg_op = 'INSERT' then
+    new.updated_at := coalesce(new.updated_at, now());
+  elsif new.updated_at is not distinct from old.updated_at then
+    new.updated_at := now();
+  end if;
   if new.status in ('doing', 'done') and new.started_at is null then
-    new.started_at := now();
+    new.started_at := new.updated_at;
   end if;
   if new.status = 'done' and (tg_op = 'INSERT' or old.status is distinct from 'done') then
-    new.completed_at := now();
+    new.completed_at := coalesce(case when tg_op = 'INSERT' then new.completed_at end, new.updated_at);
   elsif new.status <> 'done' then
     new.completed_at := null;
   end if;

@@ -65,7 +65,7 @@ create index programs_company_idx on public.programs (company_id);
 create table public.referral_codes (
   id uuid primary key default gen_random_uuid(),
   program_id uuid not null references public.programs (id) on delete cascade,
-  code text not null unique check (code ~ '^REF-[A-Z2-9]{4}-[A-Z2-9]{4}$'),
+  code text not null unique check (code ~ '^REF-[ABCDEFGHJKMNPQRSTUVWXYZ2-9]{4}-[ABCDEFGHJKMNPQRSTUVWXYZ2-9]{4}$'),
   label text check (char_length(label) <= 200),
   max_uses integer check (max_uses is null or max_uses >= 1),
   uses integer not null default 0 check (uses >= 0),

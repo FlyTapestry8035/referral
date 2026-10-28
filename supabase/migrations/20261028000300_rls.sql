@@ -73,7 +73,7 @@ create policy programs_delete on public.programs for delete to authenticated
 create policy codes_select on public.referral_codes for select to authenticated
   using (public.is_program_member(program_id));
 create policy codes_insert on public.referral_codes for insert to authenticated
-  with check (public.can_edit_program(program_id) and uses = 0);
+  with check (public.can_edit_program(program_id) and uses = 0 and (created_by is null or created_by = (select auth.uid())));
 create policy codes_update on public.referral_codes for update to authenticated
   using (public.can_edit_program(program_id))
   with check (public.can_edit_program(program_id));
@@ -96,8 +96,9 @@ create policy testers_update on public.testers for update to authenticated
   with check (public.can_edit_program(program_id));
 create policy testers_delete on public.testers for delete to authenticated
   using (public.can_edit_program(program_id));
--- Stats are computed by recompute_tester_stats; clients can only edit these columns.
-revoke update on public.testers from authenticated;
+-- Stats are computed by recompute_tester_stats; clients can only write these columns.
+revoke insert, update on public.testers from authenticated;
+grant insert (program_id, name, email, referral_code_id, notes) on public.testers to authenticated;
 grant update (name, notes, access_revoked_at, unsubscribed_at) on public.testers to authenticated;
 
 create policy terms_acceptances_select on public.terms_acceptances for select to authenticated
@@ -140,7 +141,8 @@ create policy tester_missions_update on public.tester_missions for update to aut
   with check (public.is_my_tester(tester_id));
 create policy tester_missions_delete on public.tester_missions for delete to authenticated
   using (public.is_my_tester(tester_id));
-revoke update on public.tester_missions from authenticated;
+revoke insert, update on public.tester_missions from authenticated;
+grant insert (tester_id, mission_id, status) on public.tester_missions to authenticated;
 grant update (status) on public.tester_missions to authenticated;
 
 -- ---------------------------------------------------------------------------
@@ -154,13 +156,16 @@ create policy feedback_insert on public.feedback for insert to authenticated
     public.is_my_tester(tester_id)
     and exists (select 1 from public.testers t where t.id = tester_id and t.program_id = feedback.program_id)
     and status = 'new' and team_rating is null and duplicate_of is null and tags = '{}'
+    -- A screenshot must live in this tester's own folder.
+    and (screenshot_path is null or screenshot_path like program_id::text || '/' || tester_id::text || '/%')
   );
 create policy feedback_update on public.feedback for update to authenticated
   using (public.can_edit_program(program_id))
   with check (public.can_edit_program(program_id));
 create policy feedback_delete on public.feedback for delete to authenticated
   using (public.can_edit_program(program_id));
-revoke update on public.feedback from authenticated;
+revoke insert, update on public.feedback from authenticated;
+grant insert (program_id, tester_id, kind, title, body, severity, context, screenshot_path, source) on public.feedback to authenticated;
 grant update (title, body, kind, severity, status, team_rating, duplicate_of, tags) on public.feedback to authenticated;
 
 -- ---------------------------------------------------------------------------
