@@ -1,6 +1,8 @@
 import { createHmac } from "node:crypto";
 
-export const WEBHOOK_EVENTS = ["feedback.created", "feedback.status_changed", "tester.stage_changed"] as const;
+import { WEBHOOK_EVENTS } from "./webhook-events";
+
+export { WEBHOOK_EVENTS };
 export type WebhookEvent = (typeof WEBHOOK_EVENTS)[number];
 
 /** Retry schedule after a failed attempt n (1-based). After the last entry the delivery is marked failed. */

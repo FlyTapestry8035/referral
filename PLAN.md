@@ -12,8 +12,8 @@ Status legend: `[x]` done and verified by running it, `[~]` built but only partl
 - [x] Supabase clients (browser, server, admin/service-role server-only), proxy (session refresh)
 - [x] Code generator (REF-XXXX-XXXX, crypto, no look-alikes)
 - [x] /join sign-up (Zod, password strength, terms checkbox), verification email via generateLink
-- [~] /login, /forgot-password, /reset-password, /auth/confirm (login + confirm verified in browser; reset flow verified in Phase 4 e2e)
-- [~] Rate limiting (Upstash when configured, in-memory fallback) — verified in the Phase 4 browser run
+- [x] /login, /forgot-password, /reset-password, /auth/confirm
+- [~] Rate limiting: in-memory fallback verified in the browser (6th /join attempt blocked); the Upstash path is written but untested (no Upstash account)
 - [x] Tests: stats logic (TS + SQL), code generator, tokens, validation, RLS (tester isolation, viewer read-only, cross-company)
 - [x] Lint, typecheck, tests green → commit
 
@@ -43,11 +43,12 @@ Status legend: `[x]` done and verified by running it, `[~]` built but only partl
 - [x] Lint, typecheck, tests green → commit
 
 ## Phase 4 – Features 7–10 & polish
-- [ ] Rewards rules + automatic awarding + badges
-- [ ] Nominations (helpfulness threshold, 3 each, approval queue → invite)
-- [ ] Terms versioning + re-accept gate
-- [ ] Webhooks (HMAC signature, retries with backoff via deliveries table + cron)
-- [ ] Multiple programs per company, roles enforced by RLS
-- [ ] Audit log (triggers) + audit page
-- [ ] README (setup, deploy, Needs you), final report
-- [ ] Lint, typecheck, tests green → commit
+- [x] Rewards rules + automatic awarding + badges
+- [x] Nominations (helpfulness threshold, 3 each, approval queue → invite)
+- [x] Terms versioning + re-accept gate
+- [x] Webhooks (HMAC signature, retries with backoff via deliveries table + cron)
+- [x] Multiple programs per company, roles enforced by RLS
+- [x] Audit log (triggers) + audit page
+- [x] README (setup, deploy, Needs you), final report
+- [~] Resend sending: not verified (no API key); every email was checked in its console-stub form
+- [x] Lint, typecheck, tests green → commit

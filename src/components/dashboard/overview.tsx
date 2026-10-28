@@ -48,7 +48,7 @@ export function OverviewSection({ programName, overview }: { programName: string
     <section aria-labelledby="overview-title" className="grid gap-4">
       <div>
         <h1 id="overview-title" className="text-xl font-semibold sm:text-2xl">
-          {programName} beta testers
+          {programName} testers
         </h1>
         <p className="text-muted-foreground mt-1" aria-live="polite">
           {takeaway(overview)}

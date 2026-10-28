@@ -20,7 +20,7 @@ export default async function TestersPage() {
   return (
     <TestersView
       programId={ctx.program.id}
-      programName={ctx.program.product_name || ctx.program.name}
+      programName={ctx.program.product_name ? `${ctx.program.product_name} beta` : ctx.program.name}
       initialTesters={testers ?? []}
       codes={codeMap}
       badges={badges}
